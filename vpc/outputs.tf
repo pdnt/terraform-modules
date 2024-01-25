@@ -20,7 +20,7 @@ output "vpc_id" {
 
 # export the internet gateway
 output "internet_gateway" {
-  value = aws_internet_gateway.internet_gateway.id
+  value = aws_internet_gateway.internet_gateway
 }
 
 # export the public subnet az1 id
@@ -50,7 +50,7 @@ output "private_data_subnet_az1_id" {
 
 # export the private data subnet az2 id
 output "private_data_subnet_az2_id" {
-  value = aws_subnet.private_data_subnet_az1.id
+  value = aws_subnet.private_data_subnet_az2.id
 }
 
 # export the first availability zone
