@@ -26,4 +26,5 @@ resource "aws_db_instance" "database_instance" {
   db_subnet_group_name   = aws_db_subnet_group.database_subnet_group.name
   multi_az               = var.multi_az_deployment
   vpc_security_group_ids = [var.database_security_group_id]
+  storage_encrypted  = true
 }
