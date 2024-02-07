@@ -6,6 +6,7 @@ resource "aws_lb" "application_load_balancer" {
   security_groups            = [var.alb_security_group_id]
   subnets                    = [var.public_subnet_az1_id, var.public_subnet_az2_id]
   enable_deletion_protection = false
+  drop_invalid_header_fields = true
 
   tags = {
     Name = "${var.project_name}-${var.environment}-alb"
