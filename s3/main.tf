@@ -29,7 +29,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_encryption
 resource "aws_s3_bucket_public_access_block" "aws_s3_block_PUT_calls" {
   bucket = aws_s3_bucket.env_file_bucket.id
   block_public_acls = true
-  block_public_policy = true 
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
 }
 
 # upload the environment file from local computer into the s3 bucket
