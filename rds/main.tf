@@ -27,4 +27,5 @@ resource "aws_db_instance" "database_instance" {
   multi_az               = var.multi_az_deployment
   vpc_security_group_ids = [var.database_security_group_id]
   storage_encrypted  = true
+  backup_retention_period = 5
 }
