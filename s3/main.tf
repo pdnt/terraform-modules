@@ -1,3 +1,9 @@
+# create key for s3 bucket
+resource "aws_kms_key" "mykey" {
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+
 # create an s3 bucket 
 resource "aws_s3_bucket" "env_file_bucket" {
   bucket = "${var.project_name}-${var.env_file_bucket_name}-unencrypted"
@@ -7,6 +13,7 @@ resource "aws_s3_bucket" "env_file_bucket" {
   }
 }
 
+# encrypt s3 bucket
 resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
   bucket = "${var.project_name}-${var.env_file_bucket_name}"
 
