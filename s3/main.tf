@@ -14,8 +14,8 @@ resource "aws_s3_bucket" "env_file_bucket" {
 }
 
 # encrypt s3 bucket
-resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
-  bucket = "${var.project_name}-${var.env_file_bucket_name}"
+resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_encryption" {
+  bucket = aws_s3_bucket.env_file_bucket.id
 
   rule {
     apply_server_side_encryption_by_default {
