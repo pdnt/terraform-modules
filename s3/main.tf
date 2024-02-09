@@ -1,11 +1,11 @@
-# create key for s3 bucket
+# Create key for s3 bucket
 #I ignore the tfsec alert about disabled KMS key rotation because the deletion window of such key is 10 days
 resource "aws_kms_key" "mykey" { #tfsec:ignore:aws-kms-auto-rotate-keys
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10 
 }
 
-# create an s3 bucket 
+# Create an s3 bucket 
 resource "aws_s3_bucket" "env_file_bucket" {
   bucket = "${var.project_name}-${var.env_file_bucket_name}"
 
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "env_file_bucket" {
   }
 }
 
-# encrypt s3 bucket
+# Encrypt s3 bucket
 resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_encryption" {
   bucket = aws_s3_bucket.env_file_bucket.id
 
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "aws_s3_encryption
   }
 }
 
-# enable blocking any PUT calls with a public ACL
+# Enable blocking any PUT calls with a public ACL
 resource "aws_s3_bucket_public_access_block" "aws_s3_block_PUT_calls" {
   bucket = aws_s3_bucket.env_file_bucket.id
   block_public_acls = var.block_public_acls
@@ -35,7 +35,15 @@ resource "aws_s3_bucket_public_access_block" "aws_s3_block_PUT_calls" {
   restrict_public_buckets = var.restrict_public_buckets
 }
 
-# upload the environment file from local computer into the s3 bucket
+# Enable versioning to protect against accidental/malicious removal or modification
+resource "aws_s3_bucket_versioning" "versioning_example" {
+  bucket = aws_s3_bucket.example.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# Upload the environment file from local computer into the s3 bucket
 resource "aws_s3_object" "upload_env_file" {
   bucket = aws_s3_bucket.env_file_bucket.id
   key    = var.env_file_name
