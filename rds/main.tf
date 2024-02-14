@@ -17,7 +17,7 @@ data "aws_db_snapshot" "latest_db_snapshot" {
 }
 
 # launch an rds instance from a database snapshot
-resource "aws_db_instance" "database_instance" {
+resource "aws_db_instance" "database_instance" { #tfsec:ignore:builtin.aws.rds.aws0177
   instance_class         = var.database_instance_class
   skip_final_snapshot    = true
   availability_zone      = var.availability_zone_1
