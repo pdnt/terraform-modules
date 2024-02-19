@@ -36,8 +36,8 @@ resource "aws_s3_bucket_public_access_block" "aws_s3_block_PUT_calls" {
 }
 
 # Enable versioning to protect against accidental/malicious removal or modification
-resource "aws_s3_bucket_versioning" "versioning_example" {
-  bucket = aws_s3_bucket.example.id
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.env_file_bucket.id
   versioning_configuration {
     status = "Enabled"
   }
