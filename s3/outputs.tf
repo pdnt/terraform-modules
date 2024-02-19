@@ -7,3 +7,8 @@ output "env_file_bucket_name" {
 output "env_file_name" {
   value = var.env_file_name
 }
+
+# export the s3 bucket id
+output "env_file_bucket_id" {
+  value = var.aws_s3_bucket.env_file_bucket.id
+}
