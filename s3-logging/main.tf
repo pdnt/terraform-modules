@@ -11,7 +11,7 @@ resource "aws_s3_bucket_acl" "log_bucket_acl" {
 
 # Enable logging
 resource "aws_s3_bucket_logging" "env_file_bucket" {
-  bucket = module.s3.env_file_bucket.id
+  bucket = var.env_file_bucket.id
 
   target_bucket = aws_s3_bucket.log_bucket.id
   target_prefix = "log/"
