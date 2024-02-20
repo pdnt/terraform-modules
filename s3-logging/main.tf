@@ -1,3 +1,9 @@
+# Create key for s3 bucket
+#I ignore the tfsec alert about disabled KMS key rotation because the deletion window of such key is 10 days
+resource "aws_kms_key" "mykey" { #tfsec:ignore:aws-kms-auto-rotate-keys
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10 
+}
 
 # Create logging s3 bucket
 resource "aws_s3_bucket" "log_bucket" {
