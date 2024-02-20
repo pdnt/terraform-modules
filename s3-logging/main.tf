@@ -6,7 +6,8 @@ resource "aws_kms_key" "mykey" { #tfsec:ignore:aws-kms-auto-rotate-keys
 }
 
 # Create logging s3 bucket
-resource "aws_s3_bucket" "log_bucket" {
+# Ignore logging for the logging bucket
+resource "aws_s3_bucket" "log_bucket" { #tfsec:ignore:aws-s3-enable-bucket-logging
   bucket = "${var.project_name}-${var.env_file_bucket_name}-logging"
 }
 
